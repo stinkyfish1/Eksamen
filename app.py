@@ -12,13 +12,13 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SECRET_KEY'] = 'thisisasecretkey'
 
-db = SQLAlchemy(app)
-bcrypt = Bcrypt(app)
+db = SQLAlchemy(app) # Oppretter database-objektet
+bcrypt = Bcrypt(app) # Oppretter objekt for passordkryptering
 
 
 login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = 'login'
+login_manager.init_app(app) # Knytter innlogging til appen
+login_manager.login_view = 'login'  # Definerer hvilken side man blir sendt til hvis man ikke er logget inn
 
 
 @login_manager.user_loader
@@ -28,10 +28,10 @@ def load_user(user_id):
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(20), nullable=False, unique=True)
+    username = db.Column(db.String(20), nullable=False, unique=True) # Brukernavn, må være unikt
     password = db.Column(db.String(80), nullable=False)
 
-
+# Skjema for registrering av ny bruker
 class RegisterForm(FlaskForm):
     username = StringField(validators=[
                             InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
@@ -40,7 +40,7 @@ class RegisterForm(FlaskForm):
                             InputRequired(), Length(min=8, max=20)], render_kw={"placeholder": "Password"})
 
     submit = SubmitField('Register')
-
+    # Validerer at brukernavnet ikke allerede eksisterer
     def validate_username(self, username):
         existing_user_username = User.query.filter_by(
             username=username.data).first()
@@ -76,6 +76,7 @@ def login():
     return render_template('login.html', form=form)
 
 
+# Rute for dashboard (krever at brukeren er innlogget)
 @app.route('/dashboard', methods=['GET', 'POST'])
 @login_required
 def dashboard():
@@ -102,6 +103,6 @@ def register():
 
     return render_template('register.html', form=form)
 
-
+# Starter Flask-applikasjonen
 if __name__ == "__main__":
     app.run(debug=True)

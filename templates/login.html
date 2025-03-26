@@ -6,21 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <script src="https://cdn.tailwindcss.com"></script> <!-- Add Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="">
-    <div class="">
-        <h1 class="">Login</h1>
+<body class="bg-gray-100 font-sans text-gray-800 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+        <h1 class="text-3xl font-semibold text-center text-gray-900 mb-6">Login</h1>
 
         <form method="POST" action="" class="space-y-4">
             {{ form.hidden_tag() }}
             <div>
-                <label for="username" class="">Username</label>
+                <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
                 {{ form.username(class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500") }}
             </div>
             <div>
-                <label for="password" class="">Password</label>
+                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                 {{ form.password(class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500") }}
             </div>
             <div class="flex justify-center">

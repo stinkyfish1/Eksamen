@@ -9,10 +9,10 @@
     <script src="https://cdn.tailwindcss.com"></script> 
 </head>
 
-<body class="">
-    <div class="">
-        <h1 class="">Hei du er logget inn</h1>
-        <a href="{{ url_for('logout') }}" class="">Trykk for å logge ut</a>
+<body class="bg-gray-100 font-sans text-gray-800 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full text-center">
+        <h1 class="text-3xl font-semibold text-gray-900 mb-6">Hei du er logget inn</h1>
+        <a href="{{ url_for('logout') }}" class="text-blue-500 hover:text-blue-700 text-lg font-medium">Trykk for å logge ut</a>
     </div>
 </body>
 
